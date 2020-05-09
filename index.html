@@ -11,16 +11,17 @@
 
 <body>
    <header class="main-header">
-      <a href="#" class="main-header__link"><img src="src\img\tasks-list_icon-icons.com_73381 1.svg" width="42"
-            height="42" alt="Список литературы" class="main-header__icon"></a>
+      <div class="page-container">
+         <a href="#" class="main-header__link"><img src="src\img\tasks-list_icon-icons.com_73381 1.svg" width="42"
+               height="42" alt="Список литературы" class="main-header__icon"></a>
+      </div>
    </header>
-   <main class="page-main">
+   <main class="page-main page-container">
       <h1 class="page-main__title">Список книг</h1>
       <p class="page-main__title-description">
          Впишите в пустые формы названия книг для выбора одной случайной книги
       </p>
       <div class="booklist__wrapper">
-         <li class="booklist__item">название вашей книги</li>
          <ul class="booklist">
             <li class="booklist__item">название вашей книги</li>
             <li class="booklist__item">название вашей книги</li>
@@ -31,7 +32,7 @@
             <li class="booklist__item">название вашей книги</li>
          </ul>
       </div>
-      <button type="button">Сгенерировать</button>
+      <button class="generate-button" type="button">Сгенерировать</button>
    </main>
    <script src="build/js/script.js"></script>
 </body>

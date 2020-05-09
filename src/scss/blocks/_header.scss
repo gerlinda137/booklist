@@ -1,4 +1,9 @@
 .main-header {
   display: flex;
   background-color: $mustard;
+
+  &__link {
+    margin-top: 13.5px;
+    margin-bottom: 10px;
+  }
 }

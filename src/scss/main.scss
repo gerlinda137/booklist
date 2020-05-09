@@ -4,3 +4,12 @@
 
 
 @import "blocks/header";
+@import "blocks/page-main";
+@import "blocks/booklist";
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 27px;
+  margin-right: 25px;
+}

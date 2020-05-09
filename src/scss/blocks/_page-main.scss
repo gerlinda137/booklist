@@ -1,0 +1,37 @@
+.page-main {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+
+  &__title {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-family: $Montserrat;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 9.5px;
+  }
+
+  &__title-description {
+    margin-top: 6.5px;
+    font-family: $Montserrat;
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 12.5px;
+  }
+}
+
+.generate-button {
+  border: none;
+  background-color: $mustard;
+  cursor: pointer;
+  padding-top: 15px;
+  padding-bottom: 17.5px;
+  border-radius: 8.1px;
+  box-shadow: 0 0 2.2px 0 rgba(0, 0, 0, 0.25);
+
+  font-family: $Corsa;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 9.5px;
+}
