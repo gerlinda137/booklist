@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "chokidar": "^3.4.0",
     "del": "^3.0.0"
   },
   "devDependencies": {
