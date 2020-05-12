@@ -1,98 +1,64 @@
-//Подключаем модули галпа
-const gulp = require('gulp');
-const concat = require('gulp-concat');
-const autoprefixer = require('gulp-autoprefixer');
-const cleanCSS = require('gulp-clean-css');
-const uglify = require('gulp-uglify');
-const del = require('del');
-const browserSync = require('browser-sync').create();
-const sass = require('gulp-sass');
-const sourcemaps = require('gulp-sourcemaps');
-// const watch = require('gulp-watch');
+"use strict";
 
+var gulp = require("gulp");
+var plumber = require("gulp-plumber");
+var sourcemap = require("gulp-sourcemaps");
+var sass = require("gulp-sass");
+var postcss = require("gulp-postcss");
+var autoprefixer = require("autoprefixer");
+var server = require("browser-sync").create();
+var del = require("del");
 
-//Порядок подключения css файлов
-const cssFiles = [
-   './src/scss/main.scss',
-]
-//Порядок подключения js файлов
-const jsFiles = [
-   './src/js/lib.js',
-   './src/js/main.js'
-]
+gulp.task("css", function () {
+  return gulp
+    .src("src/scss/main.scss")
+    .pipe(plumber())
+    .pipe(sourcemap.init())
+    .pipe(sass({
+      includePaths: require('node-normalize-scss').includePaths
+    }))
+    .pipe(postcss([autoprefixer()]))
+    .pipe(sourcemap.write("."))
+    .pipe(gulp.dest("build/css"))
+    .pipe(server.stream());
+});
 
-//Таск на стили CSS
-function styles() {
-   //Шаблон для поиска файлов CSS
-   //Всей файлы по шаблону './src/css/**/*.css'
-   return gulp.src(cssFiles)
-      .pipe(sourcemaps.init())
-      .pipe(sass({
-         includePaths: require('node-normalize-scss').includePaths
-      }))
-      //Объединение файлов в один
-      .pipe(concat('style.css'))
-      //Добавить префиксы
-      .pipe(autoprefixer({
-         // browsers: browserslist,
-         cascade: false
-      }))
-      //Минификация CSS
-      .pipe(cleanCSS({
-         level: 2
-      }))
-      .pipe(sourcemaps.write('./'))
-      //Выходная папка для стилей
-      .pipe(gulp.dest('./build/css'))
-      .pipe(browserSync.stream());
-}
+gulp.task("clean", function () {
+  return del("build");
+});
 
-//Таск на скрипты JS
-function scripts() {
-   //Шаблон для поиска файлов JS
-   //Всей файлы по шаблону './src/js/**/*.js'
-   return gulp.src(jsFiles)
-      //Объединение файлов в один
-      .pipe(concat('script.js'))
-      //Минификация JS
-      .pipe(uglify({
-         toplevel: true
-      }))
-      //Выходная папка для скриптов
-      .pipe(gulp.dest('./build/js'))
-      .pipe(browserSync.stream());
-}
-
-//Удалить всё в указанной папке
-function clean() {
-   return del(['build/*'])
-}
-
-//Просматривать файлы
-function watch() {
-   browserSync.init({
-      server: {
-         baseDir: "./"
+gulp.task("copy", function () {
+  return gulp
+    .src(
+      [
+        "src/fonts/**/*.{woff,woff2}",
+        "src/img/**",
+        "src/js/**",
+        "src/*.html",
+        "src/*.ico"
+      ], {
+        base: "src"
       }
-   });
-   //Следить за CSS файлами
-   gulp.watch('./src/css/**/*.css', styles)
-   gulp.watch('./src/scss/**/*.scss', styles)
-   //Следить за JS файлами
-   gulp.watch('./src/js/**/*.js', scripts)
-   //При изменении HTML запустить синхронизацию
-   gulp.watch("./*.html").on('change', browserSync.reload);
-}
+    )
+    .pipe(gulp.dest("build"));
+});
 
-//Таск вызывающий функцию styles
-gulp.task('styles', styles);
-//Таск вызывающий функцию scripts
-gulp.task('scripts', scripts);
-//Таск для очистки папки build
-gulp.task('del', clean);
-//Таск для отслеживания изменений
-gulp.task('watch', watch);
-//Таск для удаления файлов в папке build и запуск styles и scripts
-gulp.task('build', gulp.series(clean, gulp.parallel(styles, scripts)));
-//Таск запускает таск build и watch последовательно
-gulp.task('dev', gulp.series('build', 'watch'));
+gulp.task("refresh", function (done) {
+  server.reload();
+  done();
+});
+
+gulp.task("server", function () {
+  server.init({
+    server: "build/",
+    notify: false,
+    open: true,
+    cors: true,
+    ui: false
+  });
+
+  gulp.watch("src/**", gulp.series("build", "refresh"));
+});
+
+gulp.task("build", gulp.series("clean", "copy", "css"));
+gulp.task("start", gulp.series("build", "server"));
