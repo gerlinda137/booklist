@@ -5,7 +5,8 @@
   "main": "index.js",
   "dependencies": {
     "chokidar": "^3.4.0",
-    "del": "^3.0.0"
+    "del": "^3.0.0",
+    "simplebar": "^5.2.0"
   },
   "devDependencies": {
     "browser-sync": "^2.26.3",
@@ -25,7 +26,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "browserslist": [
     "defaults",
     "not IE 11",
