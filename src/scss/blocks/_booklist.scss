@@ -1,36 +1,42 @@
-.booklist {
-  list-style: none;
+.booklist-form {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+}
+
+
+.booklist-list {
+  display: flex;
+  list-style: none;
+  flex-direction: column;
   padding-left: 50px;
   padding-right: 50px;
   border-radius: 8.1px;
   box-shadow: 0 0 0.5px 0 #000000;
   border: solid 0.5px #90a4ae;
+
   height: 377px;
   overflow: hidden;
   overflow-y: scroll;
 
 
-  &__wrapper {
+  &__item {
     display: flex;
-    flex-direction: column;
-
   }
 
-  &__item {
+  &__item-input {
     width: 208px;
-    height: 35.5px;
-    text-align: center;
-    border-radius: 8.1px;
-    box-shadow: 0 0 2.2px 0 rgba(0, 0, 0, 0.25);
-    padding-top: 13px;
-    padding-bottom: 13px;
+    min-height: 35.5px;
     font-family: $Corsa;
     font-size: 10.9px;
     font-weight: normal;
     line-height: 9.5px;
+    text-align: center;
+
+    border-radius: 8.1px;
+    box-shadow: 0 0 2.2px 0 rgba(0, 0, 0, 0.25);
+
+    border: none;
 
     position: relative;
     margin-top: 10px;
@@ -40,12 +46,33 @@
       margin-top: 18px;
     }
 
+    &::placeholder {
+      font-family: $Corsa;
+      font-size: 10.9px;
+      font-weight: normal;
+      line-height: 9.5px;
+      text-align: center;
+
+    }
+
     &::after {
       content: url("../../img/dots.svg");
-      width: 25.27px;
-      height: 5.51px;
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+      width: 13.84px;
+      height: 2.99px;
       position: absolute;
       z-index: 3;
+      zoom: 50%;
+      top: 5px;
+      right: 33px;
+
+
+    }
+
+    &:hover::after {
+      filter: none;
+      cursor: pointer;
     }
   }
 }
