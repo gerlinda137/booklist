@@ -14,6 +14,7 @@
   border-radius: 8.1px;
   box-shadow: 0 0 0.5px 0 #000000;
   border: solid 0.5px #90a4ae;
+  margin-top: 0;
 
   height: 377px;
   overflow: hidden;
@@ -22,6 +23,11 @@
 
   &__item {
     display: flex;
+    position: relative;
+
+    &:first-child {
+      margin-top: 10px;
+    }
   }
 
   &__item-input {
@@ -32,6 +38,7 @@
     font-weight: normal;
     line-height: 9.5px;
     text-align: center;
+    color: $black;
 
     border-radius: 8.1px;
     box-shadow: 0 0 2.2px 0 rgba(0, 0, 0, 0.25);
@@ -42,9 +49,6 @@
     margin-top: 10px;
     z-index: 2;
 
-    &:first-child {
-      margin-top: 18px;
-    }
 
     &::placeholder {
       font-family: $Corsa;
@@ -55,24 +59,26 @@
 
     }
 
-    &::after {
-      content: url("../../img/dots.svg");
-      filter: grayscale(100%);
-      -webkit-filter: grayscale(100%);
-      width: 13.84px;
-      height: 2.99px;
-      position: absolute;
-      z-index: 3;
-      zoom: 50%;
-      top: 5px;
-      right: 33px;
+  }
 
+  &__item-button {
+    @include reset-default-button-style;
 
+    position: absolute;
+    top: 4px;
+    right: 5px;
+
+    z-index: 3;
+
+    svg circle {
+      fill: $black;
     }
 
-    &:hover::after {
-      filter: none;
-      cursor: pointer;
+    &:hover {
+      svg circle {
+        fill: #FFD200;
+      }
     }
   }
+
 }
