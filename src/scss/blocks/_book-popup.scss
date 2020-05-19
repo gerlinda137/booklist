@@ -1,0 +1,39 @@
+.book-popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  max-width: 98.3px;
+  min-height: 56.6px;
+  align-items: center;
+
+  position: absolute;
+
+  border-radius: 2.2px;
+  box-shadow: 0 0 0.5px 0 $black;
+  border: solid 0.5px #90a4ae;
+  background-color: $white;
+
+
+  &__button {
+    @include reset-default-button-style;
+    display: flex;
+    font-family: $Corsa;
+    font-size: 10.9px;
+    line-height: 9.5px;
+
+    &--correct {
+      margin-top: 11px;
+    }
+
+    &--delete {
+      padding-bottom: 9.2px;
+      padding-left: 27.5px;
+      padding-right: 25.7px;
+
+      background-color: $mustard;
+
+    }
+  }
+
+
+}
